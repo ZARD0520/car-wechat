@@ -1,0 +1,11 @@
+<view class="total">
+  <view class="head">
+    <image src="{{mine.mineSrc}}" class="head-img"></image>
+    <text>{{mine.name}}</text>
+  </view>
+  <view class="content">
+    <view class="pay c" bindtouchstart="toPay">缴纳费用</view>
+    <view class="history c" bindtouchstart="toHistory">历史缴纳记录</view>
+    <view class="contact c" bindtouchstart="contact">联系客服</view>
+  </view>
+</view>

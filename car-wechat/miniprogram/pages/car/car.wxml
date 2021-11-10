@@ -1,0 +1,22 @@
+<view class="total">
+  <view class="caring">
+    <view class="car-title">我的停车</view>
+    <image src="{{carSrc}}" class="car-image" wx:if="{{!myCar.isBlock}}"></image>
+    <image  class="car-image2" src="data:image/png;base64,{{sharImg}}" wx:else/>
+    <view class="car-status">{{myCar.isBlock ? '车位已锁':'车位未锁'}}</view>
+    <view class="car-count">
+      <view class="car-no">
+      我的车牌号：
+      {{myCar.no}}
+      </view>
+      <view class="car-time">停车时长：{{myCar.time}}分钟</view>
+      <view class="car-price">预计缴费：{{myCar.price}}元</view>
+    </view>
+    <view class="car-control" wx:if="{{myCar.isBlock}}" bindtap="unLock">
+      请扫描二维码进行关闭道闸
+    </view>
+    <view class="no-car" wx:else bindtap="Lock">
+      <view>点击开启道闸</view>
+    </view>
+  </view>
+</view>

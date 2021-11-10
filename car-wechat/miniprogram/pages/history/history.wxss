@@ -1,0 +1,22 @@
+.total{
+  font-size: 36rpx;
+  color: aliceblue;
+}
+.content{
+  height: 160rpx;
+  border-bottom:solid 1rpx gainsboro;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.date{
+  margin-left:20rpx;
+}
+.status{
+  margin-right:20rpx;
+  color: green;
+}
+.status2{
+  margin-right:20rpx;
+  color: red;
+}

@@ -1,0 +1,52 @@
+.total{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.parking{
+  width: 88%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top:60rpx;
+  border-radius: 6rpx;
+  background-color: rgb(174, 201, 224);
+}
+.parking-status{
+  margin:0 auto;
+  margin-top:10rpx;
+  margin-bottom:24rpx;
+  text-align: center;
+  font-size: 40rpx;
+  width: 100%;
+  color: rgb(88, 138, 177);
+}
+.parking-car{
+  margin-bottom: 20rpx;
+  text-align: center;
+  width: 50%;
+}
+.parking-car>image{
+  height: 160rpx;
+  width: 160rpx;
+  margin-top:10rpx;
+}
+.parking-nocar{
+  height: 160rpx;
+  width: 160rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 auto;
+  margin-top:10rpx;
+  background-color: rgb(255, 255, 255);
+  color: rgb(21, 160, 142);
+}
+
+.map{
+  width: 88%;
+  height: 400rpx;
+  margin-top:100rpx;
+  border-radius: 6rpx;
+  background-color: aliceblue;
+}

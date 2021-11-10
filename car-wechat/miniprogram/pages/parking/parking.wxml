@@ -1,0 +1,21 @@
+<view class="total">
+  <view class="parking">
+    <view class="parking-status">停车情况</view>
+    <view class="parking-car" wx:for="{{parkingList}}">
+      <view>{{item.id}}号停车位</view>
+      <image src="./../../images/image/parking/parking-car.png" wx:if="{{item.status}}"></image>
+      <view class="parking-nocar" wx:else>空闲</view>
+    </view>
+  </view>
+  <!--地图API引入-->
+  <view class="map" bindtouchstart="openMap" bind>
+    <map id="myMap"
+         style="width:100%;height:100%"
+         latitude="{{latitude}}"
+         longitude="{{longitude}}"
+         markers="{{markers}}"
+         show-location
+    >
+    </map>
+  </view>
+</view>
