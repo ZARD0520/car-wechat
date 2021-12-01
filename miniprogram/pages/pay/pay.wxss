@@ -1,0 +1,27 @@
+.total{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 36rpx;
+  color: aliceblue;
+}
+.pay{
+  display: flex;
+  flex-direction: column;
+  margin-bottom:40rpx;
+}
+.pay > text{
+  margin-top:10rpx;
+}
+.back{
+  background-color: aliceblue;
+}
+.control{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

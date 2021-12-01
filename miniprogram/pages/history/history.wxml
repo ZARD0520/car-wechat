@@ -1,0 +1,7 @@
+<view class="total">
+  <view class="content" wx:for="{{historyList}}">
+    <text class="date">{{item.date}}</text>
+    <text class="price"> {{item.price}} 元</text>
+    <text class="{{item.status?'status':'status2'}}">{{item.status ? '已缴纳':'未缴纳'}}</text>
+  </view>
+</view>

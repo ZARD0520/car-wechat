@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/parking/parking",
+    "pages/car/car",
+    "pages/mine/mine",
+    "pages/pay/pay",
+    "pages/history/history"
+  ],
+  "window": {
+    "backgroundColor": "#5960AF",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#5960AF",
+    "navigationBarTitleText": "智慧停车",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "backgroundColor": "#596099",
+    "selectedColor": "#ffeeff",
+    "list": [{
+      "pagePath": "pages/parking/parking",
+      "text": "车位情况",
+      "iconPath": "./images/icon/tabBar/parking.png",
+      "selectedIconPath": "./images/icon/tabBar/parked.png"
+    },{
+      "pagePath": "pages/car/car",
+      "text": "我的车辆",
+      "iconPath": "./images/icon/tabBar/car.png",
+      "selectedIconPath": "./images/icon/tabBar/cared.png"
+    },{
+      "pagePath": "pages/mine/mine",
+      "text": "个人中心",
+      "iconPath": "./images/icon/tabBar/mine.png",
+      "selectedIconPath": "./images/icon/tabBar/mined.png"
+    }]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

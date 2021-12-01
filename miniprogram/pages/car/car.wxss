@@ -1,0 +1,56 @@
+.total{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 34rpx;
+}
+.caring{
+  position: relative;
+  width: 88%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top:60rpx;
+  border-radius: 6rpx;
+  background-color: rgb(174, 201, 224);
+}
+.car-image{
+  margin:0 auto;
+  margin-bottom: 8rpx;
+}
+.car-image2{
+  height: 600rpx;
+  margin:0 auto;
+  margin-bottom: 8rpx;
+}
+.car-title{
+  font-size: 40rpx;
+  margin-top:10rpx;
+  margin-bottom: 20rpx;
+  color: rgb(88, 138, 177);
+}
+.car-status{
+  margin-bottom:16rpx;
+}
+.car-count{
+  margin-left:20rpx;
+  text-align: left;
+}
+.car-control{
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:28rpx;
+  background-color: cadetblue;
+  color: aliceblue;
+}
+.no-car{
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:28rpx;
+  background-color: cadetblue;
+  color: aliceblue;
+}

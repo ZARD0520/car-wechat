@@ -1,0 +1,10 @@
+<view class="total">
+  <view class="pay">
+    <text>您的车牌是{{pay.car}}</text>
+    <text>需缴费：{{pay.price}} 元</text>
+  </view>
+  <view class="control">
+    <button type="primary">点击缴费</button>
+    <button class="back" bindtap="back"> 点击返回</button>
+  </view>
+</view>
