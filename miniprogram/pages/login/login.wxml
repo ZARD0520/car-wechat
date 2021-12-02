@@ -5,16 +5,16 @@
     <view class="login_input">
         <view class="login_input_child">
           <label>账号：</label>
-          <input type="text" placeholder="请输入账号"></input>
+          <input type="text" placeholder="请输入账号" bindinput="username"></input>
         </view>
         <view class="login_input_child">
           <label>密码：</label>
-          <input type="password" placeholder="请输入密码"></input>
+          <input type="password" placeholder="请输入密码" bindinput="password"></input>
         </view>
     </view>
     <!--登录按钮-->
     <view class="group_button">
-        <button class="login_button">登录</button>
-        <button class="register_button">注册</button>
+        <button class="login_button" bindtouchstart="login">登录</button>
+        <button class="register_button" bindtouchstart="toRegister">注册</button>
     </view>
 </view>

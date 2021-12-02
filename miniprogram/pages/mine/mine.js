@@ -1,14 +1,22 @@
 // pages/mine/mine.js
+import serv from './mineServ'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    mine:{
-      name:'ZARD抑郁的QQ',
-      mineSrc:'../../images/image/mine/Moon2.jpg'
-    },
+    status:0,
+    name:'',
+    mineSrc:'../../images/image/mine/Moon2.jpg'
+  },
+
+  //点击登录
+  toLogin(){
+    wx.navigateTo({
+      url: '../login/login',
+    })
   },
 
   //缴纳费用
@@ -35,8 +43,23 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: async function (options) {
+    let that = this
+    let username = wx.getStorageSync('username')
+    try{
+      let params = { username }
+      const {data} = await serv.getProfile(params)
+      console.log(data);
+      that.setData({
+        name:data.nickname,
+        status:1
+      })
+    }catch(e){
+      wx.showToast({
+        title: '请登录',
+      })
+      console.log(e);
+    }
   },
 
   /**

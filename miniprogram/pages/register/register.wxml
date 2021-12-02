@@ -1,0 +1,31 @@
+<view class="total">
+    <!--Logo-->
+    <image src="../../images/image/login/register.png"></image>
+    <!--注册框-->
+    <view class="register_input">
+        <view class="register_input_child">
+          <label>账号：</label>
+          <input type="text" placeholder="请输入账号" bindinput="username"></input>
+        </view>
+        <view class="register_input_child">
+          <label>密码：</label>
+          <input type="password" placeholder="请输入密码" bindinput="password"></input>
+        </view>
+        <view class="register_input_child">
+          <label>昵称：</label>
+          <input type="text" placeholder="请输入昵称" bindinput="nickname"></input>
+        </view>
+        <view class="register_input_child">
+          <label>手机号码：</label>
+          <input type="text" placeholder="请输入手机号" bindinput="phone"></input>
+        </view>
+        <view class="register_input_child">
+          <label>车牌号：</label>
+          <input type="text" placeholder="请输入车牌" bindinput="carNum"></input>
+        </view>
+    </view>
+    <!--注册按钮-->
+    <view class="group_button">
+        <button class="register_button" bindtouchstart="register">注册</button>
+    </view>
+</view>

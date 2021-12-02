@@ -1,0 +1,33 @@
+.total{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top:60rpx;
+    font-size: 36rpx;
+}
+image{
+    height: 160rpx;
+    width: 160rpx;
+    margin: 0 auto;
+    margin-bottom:60rpx;
+}
+
+.register_input{
+    margin:0 auto;
+}
+.register_input_child{
+    margin-left:120rpx;
+    margin-bottom:16rpx;
+    display: flex;
+    flex-direction: row;
+    color: aliceblue;
+}
+
+.group_button{
+    margin-top:60rpx;
+}
+.group_button>button{
+    border: aliceblue solid 1rpx;
+    color: aliceblue;
+    background-color: rgb(99, 180, 167);
+}

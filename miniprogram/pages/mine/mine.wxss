@@ -1,25 +1,33 @@
 .total{
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background-color: rgb(174, 201, 224);
 }
 .head{
-  height: 250rpx;
+  height: 200rpx;
   display: flex;
   align-items: center;
   border-bottom: solid 2rpx #686868;
+}
+.clickLogin{
+  margin:0 auto;
+  font-size: 36rpx;
+  color: rgb(59, 104, 147);
 }
 .head-img{
   height: 160rpx;
   width: 160rpx;
   border-radius: 50%;
   margin-left:90rpx;
+  margin-bottom:60rpx;
 }
 .head > text{
   display: inline-block;
   margin-left:40rpx;
+  margin-bottom:60rpx;
   font-size: 36rpx;
   color: rgb(59, 104, 147);
 }
