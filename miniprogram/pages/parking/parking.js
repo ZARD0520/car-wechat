@@ -1,4 +1,6 @@
 // pages/parking/parking.js
+import serv from './parkingServ'
+
 Page({
 
   /**
@@ -15,21 +17,8 @@ Page({
         name:'停车场位置'
       }
     ],
-    parkingList:[
-      {
-        'id':1,
-        'status':false
-      },{
-        'id':2,
-        'status':true
-      },{
-        'id':3,
-        'status':false
-      },{
-        'id':4,
-        'status':false
-      }
-    ]
+    // 停车列表
+    parkingList:[]
   },
 
   //点击打开地图导航
@@ -46,7 +35,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
     let that = this
     wx.getLocation({
       type:'gcj02',
@@ -69,8 +58,21 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: async function () {
+    let that = this
+    try{
+      const {data} = await serv.getParking()
+      console.log(data);
+      that.setData({
+        parkingList:data
+      })
+    }catch(e){
+      console.log(e);
+      wx.showToast({
+        title: '请登录',
+        icon:'error'
+      })
+    }
   },
 
   /**

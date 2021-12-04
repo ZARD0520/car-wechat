@@ -54,3 +54,12 @@
   background-color: cadetblue;
   color: aliceblue;
 }
+.empty{
+  margin-top:160rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: aliceblue;
+  font-size: 36rpx;
+}

@@ -1,4 +1,6 @@
 // pages/history/history.js
+import serv from './historyServ'
+
 Page({
 
   /**
@@ -36,8 +38,30 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: async function () {
+    let that = this
+    let username = wx.getStorageSync('username')
+    if(!username){
+      return wx.showToast({
+        title: '请登录',
+        icon:'error'
+      })
+    }
+    try{
+      let params = {
+        username
+      }
+      const res = await serv.getHistoryPayment(params)
+      console.log(res);
+      that.setData({
+        historyList:res.data
+      })
+    }catch(e){
+      wx.showToast({
+        title: e,
+        icon:'error'
+      })
+    }
   },
 
   /**

@@ -1,4 +1,6 @@
 // pages/car/car.js
+import serv from './carServ'
+
 const token = '50_53RqAqmlvM423q-CWSt6PK6G-pC65BEHI135T6Mvzb7hTVO2O0xVP-sQkltobQHYsJJDwbr41ofJSy7Y-1DXDDvBhhcJtGo4UFtA4-h8hvkPeMQHGnHylKIIMT_u0RGuYOi-nTjAIV0DVx2hRUUhAJACFF'
 
 Page({
@@ -9,40 +11,64 @@ Page({
   data: {
     sharImg:'',
     carSrc:'../../images/image/car/my-car.jpeg',
-    myCar:{
-      status:true,
-      isBlock:false,
-      no:'粤A66666',
-      time:10,
-      price:'2'
-    }
+    carInfo:{},
+    parkTime:'',
+    price:'',
+    isCarLock:false
   },
 
+  //时间转换、获取价格
+  changeTime(time){
+    let that = this
+    let nowDate = new Date()
+    let date = new Date(parseInt(time))
+    // 获取毫秒数并相减
+    let nowTime = nowDate.getTime()
+    let dateTime = date.getTime()
+    let parkTime = nowTime-dateTime
+    let changeParkTime = parseInt(parkTime / 60000)
+    // 转换价格公式
+    let price = parseInt(parkTime/60000 < 30 ? 0 : parkTime/1000000)
+    that.setData({
+      parkTime:changeParkTime.toString(),
+      price:price.toString()
+    })
+  },
 
   //解锁
-  unLock(){
-    this.setData({
-      myCar:{
-        status:true,
-        isBlock:false,
-        no:'粤A66666',
-        time:10,
-        price:'2'
-      }
-    })
+  async unLock(){
+    let username = wx.getStorageSync('username')
+    let params = {
+      username
+    }
+    //接口请求
+    try{
+      const res = await serv.setUnLock(params)
+      console.log(res);
+      this.setData({
+        isCarLock:false
+      })
+    }catch(e){
+      console.log(e);
+    }
   },
   //道闸
-  Lock(){
-    this.getCode()
-    this.setData({
-      myCar:{
-        status:true,
-        isBlock:true,
-        no:'粤A66666',
-        time:10,
-        price:'2'
-      }
-    })
+  async Lock(){
+    let username = wx.getStorageSync('username')
+    let params = {
+      username
+    }
+    //接口请求
+    try{
+      const res = await serv.setLock(params)
+      console.log(res);
+      await this.getCode()
+      this.setData({
+        isCarLock:true
+      })
+    }catch(e){
+      console.log(e);
+    }
   },
 
   //获取二维码 
@@ -50,7 +76,7 @@ Page({
     //const cloud = require('wx-server-sdk')
     let that = this
     wx.request({
-      url: 'https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token='+token,
+      url: 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token='+token,
       method:'post',
       data:{
         path:'../pay/pay',
@@ -62,7 +88,9 @@ Page({
       responseType:'arraybuffer',
       success(res){
         if(res){
-          console.log(res);
+          let typeArray = new Uint8Array(res.data)
+          console.log('data:image/jpg;base64,'+wx.arrayBufferToBase64(typeArray));
+          console.log(res.data);
           console.log(wx.arrayBufferToBase64(res.data));
           that.setData({
             sharImg:wx.arrayBufferToBase64(res.data)
@@ -82,7 +110,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let status = this.data.myCar.isBlock
+    let status = this.data.carInfo?.isLock
     if(status){
       this.getCode()
     }
@@ -98,8 +126,31 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: async function () {
+    let that = this
+    let username = wx.getStorageSync('username')
+    if(!username){
+      return wx.showToast({
+        title: '请登录',
+        icon:'error'
+      })
+    }
+    try{
+      let params = {
+        username
+      }
+      const res = await serv.getLockStatus(params)
+      console.log(res);
+      this.changeTime(res.data.startTime)
+      that.setData({
+        carInfo:res.data.carInfo
+      })
+    }catch(e){
+      wx.showToast({
+        title: e,
+        icon:'error'
+      })
+    }
   },
 
   /**

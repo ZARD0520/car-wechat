@@ -25,3 +25,7 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+image{
+  margin-bottom:100rpx;
+}

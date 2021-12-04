@@ -1,13 +1,41 @@
+import serv from './payServ'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    carNum:'',
     pay:{
-      car:'粤A66666',
-      price:'68'
     }
+  },
+
+  //缴费
+  async pay(){
+    let carNum = this.data.carNum
+    if(!carNum){
+      return wx.showToast({
+        title: '请登录',
+        icon:'error'
+      })
+    }
+    // 缴费请求
+    try{
+      let params = {
+        carNum
+      }
+      const res = await serv.onPay(params)
+      console.log(res.data);
+    }catch(e){
+      wx.showToast({
+        title: e,
+        icon:'error'
+      })
+    }
+    wx.navigateBack({
+      delta: 1,
+    })
   },
 
   //返回
@@ -34,8 +62,31 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    
+  onShow: async function () {
+    let that = this
+    let username = wx.getStorageSync('username')
+    if(!username){
+      return wx.showToast({
+        title: '请登录',
+        icon:'error'
+      })
+    }
+    try{
+      let params = {
+        username
+      }
+      const res = await serv.getPayment(params)
+      console.log(res);
+      that.setData({
+        pay:res.data[0],
+        carNum:res.data[0].carNum
+      })
+    }catch(e){
+      wx.showToast({
+        title: e,
+        icon:'error'
+      })
+    }
   },
 
   /**

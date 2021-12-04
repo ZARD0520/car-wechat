@@ -43,23 +43,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: async function (options) {
-    let that = this
-    let username = wx.getStorageSync('username')
-    try{
-      let params = { username }
-      const {data} = await serv.getProfile(params)
-      console.log(data);
-      that.setData({
-        name:data.nickname,
-        status:1
-      })
-    }catch(e){
-      wx.showToast({
-        title: '请登录',
-      })
-      console.log(e);
-    }
+  onLoad: function (options) {
+    
   },
 
   /**
@@ -72,8 +57,29 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: async function () {
+    let that = this
+    let username = wx.getStorageSync('username')
+    if(!username){
+      return wx.showToast({
+        title: '请登录',
+        icon:'error'
+      })
+    }
+    try{
+      let params = { username }
+      const {data} = await serv.getProfile(params)
+      console.log(data);
+      that.setData({
+        name:data.nickname,
+        status:1
+      })
+    }catch(e){
+      wx.showToast({
+        title: '请登录',
+        icon:'error'
+      })
+    }
   },
 
   /**

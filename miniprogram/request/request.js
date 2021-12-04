@@ -4,7 +4,7 @@ export default function(params){
         console.log(params);
         
         // 判断super、token来触发reject
-        if(!params.data.password && !token){
+        if(!params.data?.password && !token){
             reject('请登录')
         }
         let parameter = {
@@ -42,7 +42,7 @@ export default function(params){
                 title: "请求失败2",
                 icon: "error",
               });
-              reject(error);
+              reject(err);
           }
         })
     })

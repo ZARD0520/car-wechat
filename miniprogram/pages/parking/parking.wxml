@@ -1,9 +1,9 @@
 <view class="total">
   <view class="parking">
     <view class="parking-status">停车情况</view>
-    <view class="parking-car" wx:for="{{parkingList}}">
-      <view>{{item.id}}号停车位</view>
-      <image src="./../../images/image/parking/parking-car.png" wx:if="{{item.status}}"></image>
+    <view class="parking-car" wx:for="{{parkingList}}" wx:key="index">
+      <view>{{item.parklot}}号停车位</view>
+      <image src="./../../images/image/parking/parking-car.png" wx:if="{{item.hasCar}}"></image>
       <view class="parking-nocar" wx:else>空闲</view>
     </view>
   </view>

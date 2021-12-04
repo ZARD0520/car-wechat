@@ -1,7 +1,7 @@
 <view class="total">
-  <view class="content" wx:for="{{historyList}}">
+  <view class="content" wx:for="{{historyList}}" wx:key="index">
     <text class="date">{{item.date}}</text>
     <text class="price"> {{item.price}} 元</text>
-    <text class="{{item.status?'status':'status2'}}">{{item.status ? '已缴纳':'未缴纳'}}</text>
+    <text class="{{item.hasPay?'status':'status2'}}">{{item.hasPay ? '已缴纳':'未缴纳'}}</text>
   </view>
 </view>
