@@ -26,7 +26,7 @@
 }
 .head > text{
   display: inline-block;
-  margin-left:40rpx;
+  margin-left:60rpx;
   margin-bottom:60rpx;
   font-size: 36rpx;
   color: rgb(59, 104, 147);
@@ -51,4 +51,9 @@
 }
 .contact{
   border:0;
+}
+.exit{
+  position:absolute;
+  right:60rpx;
+  font-size: 22rpx;
 }

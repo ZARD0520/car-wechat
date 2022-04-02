@@ -7,4 +7,12 @@ export default class {
             method:'POST'
         })
     }
+
+    static searchParking(parklot){
+        return request({
+            url:'/searchParking',
+            method:'POST',
+            data:{parklot}
+        })
+    }
 }

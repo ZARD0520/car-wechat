@@ -19,6 +19,18 @@ Page({
     })
   },
 
+  //退出登录
+  toExit(){
+    this.setData({
+      status:0
+    })
+    wx.clearStorageSync('token')
+    wx.clearStorageSync('username')
+    wx.navigateTo({
+      url: '../login/login',
+    })
+  },
+
   //缴纳费用
   toPay(){
     wx.navigateTo({

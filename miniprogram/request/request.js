@@ -13,7 +13,9 @@ export default function(params){
             },
             data:{}
         }
-        let BASEURL = 'http://localhost:3024'
+        let BASEURL = 
+        /* 'http://localhost:3028' */
+        'http://47.112.128.68/carServer'
         parameter = Object.assign(parameter,params)
 
         wx.request({

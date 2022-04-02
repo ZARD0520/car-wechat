@@ -1,5 +1,6 @@
 // pages/car/car.js
 import serv from './carServ'
+import mqtt from '../../utils/mqtt'
 
 const token = '50_53RqAqmlvM423q-CWSt6PK6G-pC65BEHI135T6Mvzb7hTVO2O0xVP-sQkltobQHYsJJDwbr41ofJSy7Y-1DXDDvBhhcJtGo4UFtA4-h8hvkPeMQHGnHylKIIMT_u0RGuYOi-nTjAIV0DVx2hRUUhAJACFF'
 
@@ -12,9 +13,65 @@ Page({
     sharImg:'',
     carSrc:'../../images/image/car/my-car.jpeg',
     carInfo:{},
+    client:null,
+    host:'broker.emqx.io:8084',
+    topic:'topic/control',
+    token:'',
+    mqttOptions:{
+      protocolVersion:4,
+      clientId:'car_wechat',
+      clean:true,
+      username:'',
+      password:'',
+      reconnectPeriod:1000,
+      connectTimeout:30 * 1000,
+      resubscribe:true
+    },
     parkTime:'',
     price:'',
     isCarLock:false
+  },
+
+  //mqtt连接
+  connect(){
+    this.data.client = mqtt.connect(`wxs://${this.data.host}/mqtt`,this.data.mqttOptions)
+    this.data.client.on('connect',()=>{
+      wx.showToast({
+        title: '连接成功',
+      })
+    })
+  },
+
+  //mqtt订阅
+  subscribe(){
+    this.data.client.subscribe(this.data.topic)
+    wx.showToast({
+      title: '订阅成功',
+    })
+  },
+
+  //mqtt道闸指令
+  mqttLock(){
+    try{
+      this.data.client.publish(this.data.topic,'0')
+      wx.showToast({
+        title: '道闸成功',
+      })
+    }catch(e){
+      console.log(e);
+    }
+  },
+
+  //mqtt开锁指令
+  mqttUnlock(){
+    try{
+      this.data.client.publish(this.data.topic,'1')
+      wx.showToast({
+        title: '开锁成功',
+      })
+    }catch(e){
+      console.log(e);
+    }
   },
 
   //时间转换、获取价格
@@ -44,6 +101,7 @@ Page({
     //接口请求
     try{
       const res = await serv.setUnLock(params)
+      this.mqttUnlock()
       console.log(res);
       this.setData({
         isCarLock:false
@@ -62,13 +120,37 @@ Page({
     try{
       const res = await serv.setLock(params)
       console.log(res);
+      this.mqttLock()
       await this.getCode()
       this.setData({
         isCarLock:true
       })
+      console.log(res);
     }catch(e){
       console.log(e);
     }
+  },
+
+  //获取token
+  getToken(){
+    let that = this
+    wx.request({
+      url:`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx6edf9974c5b55549&secret=c344f0341550cf6689c33bf8e3e36273`,
+      method:'get',
+      success(res){
+        if(res){
+          console.log(res.data.access_token);
+          that.setData({
+            token:res.data.access_token
+          })
+          wx.showToast({
+            title: '获取token成功',
+          })
+        }else{
+          console.log('fail');
+        }
+      }
+    })
   },
 
   //获取二维码 
@@ -76,12 +158,12 @@ Page({
     //const cloud = require('wx-server-sdk')
     let that = this
     wx.request({
-      url: 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token='+token,
-      method:'post',
+      url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${that.data.token}`,
       data:{
-        path:'../pay/pay',
-        width:400
+        scene:'car',
+        page:'pages/car/car'
       },
+      method:'post',
       header:{
         'content-type':'application/json'
       },
@@ -89,9 +171,6 @@ Page({
       success(res){
         if(res){
           let typeArray = new Uint8Array(res.data)
-          console.log('data:image/jpg;base64,'+wx.arrayBufferToBase64(typeArray));
-          console.log(res.data);
-          console.log(wx.arrayBufferToBase64(res.data));
           that.setData({
             sharImg:wx.arrayBufferToBase64(res.data)
           })
@@ -119,8 +198,11 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
+  onReady: async function () {
+    await this.connect()
+    console.log(this.data.client);
+    await this.subscribe()
+    this.getToken()
   },
 
   /**
@@ -140,6 +222,11 @@ Page({
         username
       }
       const res = await serv.getLockStatus(params)
+      if(res.err_code === 1){
+        that.setData({
+          carInfo:null
+        })
+      }
       console.log(res);
       this.changeTime(res.data.startTime)
       that.setData({

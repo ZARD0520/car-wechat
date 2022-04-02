@@ -6,6 +6,11 @@
       <image src="./../../images/image/parking/parking-car.png" wx:if="{{item.hasCar}}"></image>
       <view class="parking-nocar" wx:else>空闲</view>
     </view>
+    <view class="parking-search">
+      <!--具体导航到某个停车位-->
+      <view>停车位搜索</view>
+      <input type="text" 	placeholder="请输入停车位号码"	placeholder-style="margin-left:50rpx" bindblur="search"/>
+    </view>
   </view>
   <!--地图API引入-->
   <view class="map" bindtouchstart="openMap" bind>

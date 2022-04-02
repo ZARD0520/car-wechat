@@ -21,6 +21,22 @@ Page({
     parkingList:[]
   },
 
+  //点击搜索车位
+  async search(e){
+    let that = this
+    let num = e.detail.value;
+    //根据值请求接口
+    try{
+      const {dataArr} = await serv.searchParking(num);
+      that.setData({
+        parkingList:dataArr
+      })
+      console.log(dataArr);
+    }catch(e){
+      console.error(e);
+    }
+  },
+
   //点击打开地图导航
   openMap(){
     let that = this

@@ -2,6 +2,9 @@
   <view class="head" wx:if="{{status}}">
     <image src="{{mineSrc}}" class="head-img"></image>
     <text>{{name}}</text>
+    <view class="exit" bindtouchstart="toExit">
+      [退出登录]
+    </view>
   </view>
   <view class="head" wx:else>
     <view class="clickLogin" bindtouchstart="toLogin">点击登录</view>

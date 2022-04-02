@@ -50,3 +50,21 @@
   border-radius: 6rpx;
   background-color: aliceblue;
 }
+
+.parking-search{
+  margin:0 auto;
+  margin-top:20rpx;
+  margin-bottom:20rpx;
+}
+
+.parking-search > view{
+  width: 100%;
+  text-align: center;
+  margin-bottom:6rpx;
+}
+
+input{
+  border-radius: 16rpx;
+  background-color: rgb(139, 175, 175);
+  height: 60rpx;
+}
