@@ -28,10 +28,16 @@ Page({
     //根据值请求接口
     try{
       const {dataArr} = await serv.searchParking(num);
-      that.setData({
-        parkingList:dataArr
+      let pList = dataArr.map((item)=>{
+        if(item){
+          return item;
+        }
       })
-      console.log(dataArr);
+      console.log(pList);
+      that.setData({
+        parkingList:pList
+      })
+      console.log(that.data.parkingList);
     }catch(e){
       console.error(e);
     }

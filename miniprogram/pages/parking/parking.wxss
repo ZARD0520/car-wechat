@@ -26,7 +26,7 @@
   text-align: center;
   width: 50%;
 }
-.parking-car>image{
+.parking-car image{
   height: 160rpx;
   width: 160rpx;
   margin-top:10rpx;
