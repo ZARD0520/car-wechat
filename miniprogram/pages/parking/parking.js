@@ -28,16 +28,23 @@ Page({
     //根据值请求接口
     try{
       const {dataArr} = await serv.searchParking(num);
-      let pList = dataArr.map((item)=>{
-        if(item){
-          return item;
-        }
-      })
-      console.log(pList);
-      that.setData({
-        parkingList:pList
-      })
-      console.log(that.data.parkingList);
+      if(dataArr){
+        let pList = dataArr.map((item)=>{
+          if(item){
+            return item;
+          }
+        })
+        console.log(pList);
+        that.setData({
+          parkingList:pList
+        })
+        console.log(that.data.parkingList);
+      }else{
+        wx.showToast({
+          title: '没有该车位信息',
+          icon:'error'
+        })
+      }
     }catch(e){
       console.error(e);
     }
